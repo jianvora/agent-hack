@@ -114,6 +114,11 @@ def append_to_research_log( content, work_dir = ".", **kwargs):
 
     return "Successfully appended to research log"
 
+def human_input( question, work_dir = ".", **kwargs):
+    user_input = input("{}: ".format(question))
+
+    return user_input
+
 def edit_script_lines( script_name, start_line_number, end_line_number,edit_instruction, save_name, work_dir = ".", **kwargs):
     try:
         start_line_number = int(start_line_number)
@@ -268,4 +273,14 @@ HIGH_LEVEL_ACTIONS =[
         return_value="The observation will be a description of relevant content and lines in the research log.",
         function=retrieval_from_research_log
     ),
+    ActionInfo(
+        name="Ask for Human Input",
+        description="Use this to ask for human input in case you are stuck at some point or want some .",
+        usage={
+            "question": "question/suggestion/help to ask the human",
+        },
+        return_value="The observation will be a description of human feedback.",
+        function=human_input
+    ),
+
 ]
