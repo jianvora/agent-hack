@@ -1,0 +1,47 @@
+
+===================prompt=====================
+
+
+Human: Given this python script:
+    ```python 
+    import pandas as pd
+
+
+df = pd.read_csv("us_state_vaccinations.csv")
+df = df[df["date"] == "2023-05-10"]
+
+
+relevant_data = df[["location", "people_fully_vaccinated_per_hundred", "total_vaccinations_per_hundred", "daily_vaccinations_per_million"]]
+print(relevant_data.columns)
+print(relevant_data.head())
+    ```
+    Edit the script by following the instruction:
+    Add code to calculate and print the mean and median of the 'people_fully_vaccinated_per_hundred' column.
+    Provide the full code after the edit, making no other changes. Start the python code with "```python". 
+
+     
+
+Assistant:
+===================claude-v1 response (4000)=====================
+ ```python 
+import pandas as pd
+
+
+df = pd.read_csv("us_state_vaccinations.csv")
+df = df[df["date"] == "2023-05-10"]
+
+
+relevant_data = df[["location", "people_fully_vaccinated_per_hundred", "total_vaccinations_per_hundred", "daily_vaccinations_per_million"]]
+print(relevant_data.columns)
+print(relevant_data.head())
+
+mean = relevant_data["people_fully_vaccinated_per_hundred"].mean()
+print(mean)
+median = relevant_data["people_fully_vaccinated_per_hundred"].median()  
+print(median)
+```
+===================tokens=====================
+Number of prompt tokens: 161
+Number of sampled tokens: 130
+
+

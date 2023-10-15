@@ -1,0 +1,18 @@
+
+
+Step 0:
+[Reasoning]: I wanted to get an overview of all files available to determine where to start.
+[Action]: I listed all files in the current directory using the {"dir_path": "."} input.
+[Observation]: The files are:
+```
+Current Status of Epidemiology, Diagnosis, Therapeutics, and Vaccines for Novel Coronavirus Disease 2019 (COVID-19).txt  
+README.md
+Retrospectively modeling the effects of increased global vaccine sharing on the COVID-19 pandemic.txt
+SARS-CoV-2_COVID-19- Viral Genomics, Epidemiology, Vaccines, and Therapeutic Interventions.txt
+analyse_vaccinations.py
+backup/
+pfizer_ceo_transcript_march_31_2022.txt
+pfizer_financials_FY2022.txt
+us_state_vaccinations.csv
+```
+
