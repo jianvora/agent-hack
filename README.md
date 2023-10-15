@@ -1,7 +1,10 @@
-# Data Analysis Bot 
+# UDABI: Unstructured Data Analysis and Business Intelligence
 
 - Project at [Autonomous Agents Hackathon@AGI House](https://partiful.com/e/YI5dqycxq2o87Dx2Bn2o) on October 24, 2023
 - Sponsored by [Sebastian Thrun](http://robots.stanford.edu/personal.html) and [Brett Kuprel](https://www.linkedin.com/in/kuprel) from Sage AI and [Hendrik Dahlkamp](https://www.linkedin.com/in/hendrik-dahlkamp-12981) 
+
+
+UDABI is not just a chatbot; it's your data-driven ally in the world of business. With the power to transform unstructured data like CSV files, text, and more into invaluable business insights, UDABI revolutionizes the way you understand and leverage your data.
 
 
 ## Setup
