@@ -27,7 +27,27 @@ def reflection( things_to_reflect_on, work_dir = ".", research_problem = "", **k
 
 def understand_file( file_name, things_to_look_for, work_dir = ".", **kwargs):
 
-    lines = read_file(file_name, work_dir = work_dir, **kwargs).split("\n")
+    if file_name.split('.')[-1] == "csv":
+        return "You cannot read a csv file directly. Instead write a python code to load the csv and do whatever processing you want it to."
+
+    if file_name.split('.')[-1] == "pdf":
+        import PyPDF2
+        filename = ""
+        # Open the PDF file in binary mode
+        with open('./{}.pdf'.format(file_name.split('.')[0]), 'rb') as file:
+        # Create a PDF reader object
+            pdf_reader = PyPDF2.PdfReader(file)
+            # Initialize an empty string to store the plaintext
+            plaintext = ""
+            # Iterate over each page in the PDF
+            for page_num in range(len(pdf_reader.pages)):
+            # Extract the text from the page
+                page = pdf_reader.pages[page_num]
+                text = page.extract_text()
+                plaintext += text
+        lines = plaintext
+    else:
+        lines = read_file(file_name, work_dir = work_dir, **kwargs).split("\n")
     # group lines to blocks so that each block has at most 10000 characters
     counter = 0
     blocks = []
@@ -178,6 +198,87 @@ def inspect_script_lines( script_name, start_line_number, end_line_number, work_
     content = "\n".join(lines[max(int(start_line_number)-1, 0):int(end_line_number)])
     return f"Here are the lines (the file ends at line {len(lines)}):\n\n" + content
 
+
+import requests
+from pathlib import Path
+from bs4 import BeautifulSoup
+from googlesearch import search
+import openai
+import json
+
+
+def get_clean_text_from_url(url: str) -> str:
+    r = requests.get(url, timeout=2)
+    if r.status_code == 200:
+        page = r.text
+        soup: BeautifulSoup = BeautifulSoup(page, "html.parser")
+        text = clean_up_html(soup)
+        return text
+
+
+def clean_up_html(soup: BeautifulSoup) -> str:
+    text = soup.get_text()
+    text = text.split()  # Remove spaces / tabs
+    text = " ".join(text)
+    return text
+
+
+def retrieve_google_results(
+    query: str,
+    num_results: int = 3,
+    context: str = "The following text is scraped from a website and contains the raw text from the html body.",
+):
+    urls = search(query, sleep_interval=1, num_results=num_results * 4)
+    summaries = []
+    num_success = 0
+    for url in urls:
+        print(f"Trying {url}")
+        if num_success == num_results:
+            break
+        try:
+            text = get_clean_text_from_url(url)
+            if text is None:
+                continue
+            summary = summarize_result(text, context)
+            summaries.append(summary)
+            num_success += 1
+        except:
+            print("FAIL")
+            pass
+    return summaries
+
+
+def summarize_result(
+    text: str,
+    context: str = "",
+    chunksize: int = 2_000,
+):
+    # openai.api_key = os.environ["OPENAI_API_KEY"]
+    openai.api_key = "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"
+    words = text.split(" ")
+    chunks = [
+        " ".join(words[i : i + chunksize]) for i in range(0, len(words), chunksize)
+    ]
+    responses = []
+    for chunk in chunks:
+        # Prompt the user for input
+        prompt = (
+            context
+            + ". Please summarize the following text in 3-4 short sentences: "
+            + chunk
+        )
+
+        # GPT-4 (chat)
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=500,
+        )
+        response_text = response.choices[0].message.content
+        print(f"GPT-4: {response_text}")
+        responses.append(response_text)
+    return " ".join(responses)
+
 def retrieval_from_research_log(current_plan, work_dir = ".", **kwargs):
 
     research_problem = kwargs["research_problem"]
@@ -273,14 +374,23 @@ HIGH_LEVEL_ACTIONS =[
         return_value="The observation will be a description of relevant content and lines in the research log.",
         function=retrieval_from_research_log
     ),
+    # ActionInfo(
+    #     name="Ask for Human Input",
+    #     description="Use this to ask for human input in case you are stuck at some point or want some .",
+    #     usage={
+    #         "question": "question/suggestion/help to ask the human",
+    #     },
+    #     return_value="The observation will be a description of human feedback.",
+    #     function=human_input
+    # ),
     ActionInfo(
-        name="Ask for Human Input",
-        description="Use this to ask for human input in case you are stuck at some point or want some .",
+        name="Google Search",
+        description=" Use this action to query any information on the web.",
         usage={
-            "question": "question/suggestion/help to ask the human",
+            "query": "question to search on google",
         },
-        return_value="The observation will be a description of human feedback.",
-        function=human_input
+        return_value="The observation will be a summarization of the top 3 hits after performing a google search.",
+        function=retrieve_google_results
     ),
 
 ]

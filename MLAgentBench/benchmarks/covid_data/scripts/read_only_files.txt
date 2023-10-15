@@ -1,0 +1,8 @@
+./locations-age.csv
+./locations-manufacturer.csv
+./locations.csv
+./us_state_vaccinations.csv
+./vaccinations.csv
+./vaccinations-by-age-group.csv
+./vaccinations-by-manufacturer.csv
+
