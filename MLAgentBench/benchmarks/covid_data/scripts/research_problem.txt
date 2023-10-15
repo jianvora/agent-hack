@@ -13,6 +13,12 @@ Examine the Pfizer financial information.
 Synthesize the information in your generated log file to create your final report.
 
 Make sure to first go through all documents provided to you before declaring a final answer.
+ 
+Concretely, remember your final goal of answering the following set of questions in addition to any good insights that you generated from data:
+1. Give me 3 states with the lowest vaccination rates?
+2. Mean and median vaccination rates across states?
+3. Provide some connections from various data sources which you explored?
 
 Always remember to NEVER try to understand a csv file directly. Always look at a csv file
 by writing some python code in analyse_vaccinations.py and printing some stuff in it (such as useful statistics).
+
