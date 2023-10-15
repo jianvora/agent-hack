@@ -4,7 +4,7 @@ from pathlib import Path
 
 st.title("Auto-Consultant")
 
-path = (Path(__file__).parent.parent.parent / "./first_test/agent_log/main_log").resolve()
+path = (Path(__file__).parent.parent.parent / "./logs_1/agent_log/main_log").resolve()
 if path.exists():
     content = path.read_text()
 
