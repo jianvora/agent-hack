@@ -25,3 +25,11 @@ Frontend
 ```
 streamlit run frontend/home.py
 ```
+
+## Team
+
+- [Rachel Freedman](https://rachelfreedman.github.io/)
+- [Alexander Naumann](https://a-nau.github.io)
+- [Alex Vessel](https://www.linkedin.com/in/alex-vesel-a315b11b6)
+- [Jian Vora](https://jianvora.github.io/)
+
