@@ -383,14 +383,14 @@ HIGH_LEVEL_ACTIONS =[
     #     return_value="The observation will be a description of human feedback.",
     #     function=human_input
     # ),
-    ActionInfo(
-        name="Google Search",
-        description=" Use this action to query any information on the web.",
-        usage={
-            "query": "question to search on google",
-        },
-        return_value="The observation will be a summarization of the top 3 hits after performing a google search.",
-        function=retrieve_google_results
-    ),
+    # ActionInfo(
+    #     name="Google Search",
+    #     description=" Use this action to query any information on the web.",
+    #     usage={
+    #         "query": "question to search on google",
+    #     },
+    #     return_value="The observation will be a summarization of the top 3 hits after performing a google search.",
+    #     function=retrieve_google_results
+    # ),
 
 ]

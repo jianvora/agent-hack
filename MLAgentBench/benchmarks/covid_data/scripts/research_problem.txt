@@ -4,16 +4,15 @@ Ensure that all of your insights can be supported by data. When you are ready, w
 Never try to understand a csv file as it is. You can only access a csv file by loading in a python script and print statements which might provide you some insights.
 
 Here is a good initial research plan:
+First list all files in the directory to remember their names
 Examine the Pfizer CEO interview transcript to find out about the company’s current direction.
 Examine the vaccinations by state CSV file by loading into a python script provided (analyse_vaccinations.py).
 Extract some useful statistics by modifying analyse_vaccinations.py
 Determine if useful information exists in the research papers, which are named by their title.
 Examine the Pfizer financial information.
-Search the internet to determine any missing information you may require.
 Synthesize the information in your generated log file to create your final report.
 
-You can also plot in python and make sure to always only save the figure and not show it.
 Make sure to first go through all documents provided to you before declaring a final answer.
 
 Always remember to NEVER try to understand a csv file directly. Always look at a csv file
-by writing some python code in analyse_vaccinations.py and printing some stuff in it.
+by writing some python code in analyse_vaccinations.py and printing some stuff in it (such as useful statistics).
